@@ -56,6 +56,7 @@ export default class InitScene {
 
         const spotLight =  new THREE.SpotLight(0xffffff, 1);
         spotLight.castShadow = true;
+        spotLight.position.set(0,62,32)
         this.scene.add(spotLight);
 
         // RESIZING WINDOW

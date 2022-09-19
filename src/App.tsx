@@ -1,10 +1,8 @@
-import { useEffect } from 'react'
-import * as Three from 'three';
-import './App.css'
+import { useEffect } from 'react';
+import { GUI } from 'dat.gui';
+import {Mesh, Scene, BoxGeometry, MeshPhongMaterial } from 'three';
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import Stats from 'three/examples/jsm/libs/stats.module';
-import { render } from 'react-dom';
+
 import InitScene from './scene/init.scene';
 
 function App() {
@@ -16,11 +14,36 @@ function App() {
     mainScene.initialize();
     mainScene.animate();
 
-    // ADD A BOX GEOMETRY
-    const boxGeometry = new Three.BoxGeometry(16,16,16);
-    const boxMaterial = new Three.MeshNormalMaterial();
-    const boxMesh = new Three.Mesh(boxGeometry, boxMaterial);
-    (mainScene.scene as Three.Scene).add(boxMesh);
+    
+    // BOX GEOMETRY
+    const boxGeometry = new BoxGeometry(24,24,24);
+    const boxMaterial = new MeshPhongMaterial({color: 0xff0000});
+    const boxMesh = new Mesh(boxGeometry, boxMaterial);
+    (mainScene.scene as Scene).add(boxMesh);
+    
+    // GUI
+    const gui= new GUI();
+    
+    const geometryFolder = gui.addFolder('Mesh Geometry');
+    geometryFolder.open();
+    const rotationFolder = geometryFolder.addFolder('Rotation');
+    rotationFolder.add(boxMesh.rotation, 'x', 0, Math.PI).name('Rotate X axis');
+    rotationFolder.add(boxMesh.rotation, 'y', 0, Math.PI).name('Rotate Y axis');
+    rotationFolder.add(boxMesh.rotation, 'z', 0, Math.PI).name('Rotate Z axis');
+    const scaleFolder = geometryFolder.addFolder('Scale');
+    scaleFolder.add(boxMesh.scale, 'x', 0, 2).name('Scale x axis');
+    scaleFolder.add(boxMesh.scale, 'y', 0, 2).name('Scale Y axis');
+    scaleFolder.add(boxMesh.scale, 'z', 0, 2).name('Scale Z axis');
+    
+    const materialFolder = gui.addFolder('Mesh Material');
+    materialFolder.open();
+    const materialParams = {
+      boxMeshColor : boxMesh.material.color.getHex()
+    }
+    materialFolder.add(boxMesh.material, 'wireframe');
+    materialFolder.addColor(materialParams, 'boxMeshColor').onChange((value)=> boxMesh.material.color.set(value))
+    
+    
   }, [])
 
   return (
