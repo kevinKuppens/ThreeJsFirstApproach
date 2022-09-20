@@ -41,26 +41,8 @@ function App() {
     
     // GUI
     const gui= new GUI();
-    
     const mainGui = new MainGui(gui, mainScene);
     mainGui.initGui();
-    
-    // rotationFolder.add(boxMesh.rotation, 'x', 0, Math.PI).name('Rotate X axis');
-    // rotationFolder.add(boxMesh.rotation, 'y', 0, Math.PI).name('Rotate Y axis');
-    // rotationFolder.add(boxMesh.rotation, 'z', 0, Math.PI).name('Rotate Z axis');
-    // const scaleFolder = geometryFolder.addFolder('Scale');
-    // scaleFolder.add(boxMesh.scale, 'x', 0, 2).name('Scale x axis');
-    // scaleFolder.add(boxMesh.scale, 'y', 0, 2).name('Scale Y axis');
-    // scaleFolder.add(boxMesh.scale, 'z', 0, 2).name('Scale Z axis');
-    
-    // const materialFolder = gui.addFolder('Mesh Material');
-    // materialFolder.open();
-    // const materialParams = {
-    //   boxMeshColor : boxMesh.material.color.getHex()
-    // }
-    // materialFolder.add(boxMesh.material, 'wireframe');
-    // materialFolder.addColor(materialParams, 'boxMeshColor').onChange((value)=> boxMesh.material.color.set(value))
-    
     
   }, [])
 

@@ -1,9 +1,10 @@
 import { GUI } from "dat.gui";
+import InitScene from "../scene/init.scene";
 
 export default class MainGui{
     gui: GUI;
-    mainScene!: any;
-    constructor(globalGui: GUI, mainScene: any){
+    mainScene: InitScene;
+    constructor(globalGui: GUI, mainScene: InitScene){
         this.gui = globalGui;
         this.mainScene = mainScene;
     }
@@ -34,6 +35,4 @@ export default class MainGui{
             spotLightPosition.add(this.mainScene.spotLight.position, 'z').name('Position z');
         }
     }
-
-
 }
